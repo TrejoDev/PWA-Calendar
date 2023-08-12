@@ -1,10 +1,12 @@
 import { useAuthStore } from "../../hooks/useAuthStore"
+import { useOnlineStatus } from "../../hooks/useOnlineStatus";
 
 
 export const Navbar = () => {
 
   const { startLogout, user } = useAuthStore();
-
+  const { isOnline } =  useOnlineStatus();
+  
   return (
     <div className="navbar navbar-dark bg-dark mb-4 px-4">
         <span className="navbar-brand">
@@ -12,6 +14,12 @@ export const Navbar = () => {
             &nbsp;
             { user.name }
         </span>
+        {
+          isOnline 
+          ? <span className="text-success">Online</span>
+          : <span className="text-danger">Offline</span>
+        }
+        
 
         <button 
           className="btn btn-outline-danger"
